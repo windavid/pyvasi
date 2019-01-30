@@ -9,7 +9,7 @@ class CommandMap(dict):
     define typing if you want to pass not string arguments to functions
     args will be passed as keyword arguments
     se bellow for an usage example
-    
+
     ref: Light version of fire.Fire() from fire pip package
     """
     def __init__(self, description="write description here"):
