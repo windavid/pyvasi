@@ -17,3 +17,7 @@ Definitions:
 * vessel/dish
 
 Python pieces of useful (or useless) pieces of code, tricks and examples.
+
+* latecall
+* commandmap
+* asynctools
