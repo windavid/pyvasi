@@ -50,7 +50,7 @@ class CommandMap(dict):
         return self[name](**dargs)
 
 
-if __name__ == "__main__":
+def test_command_map():
     def sum_int(arg1: int, arg2: int):
         """
         example of function with type annotations
@@ -65,7 +65,6 @@ if __name__ == "__main__":
         print("sum_any:", a1, a2, a1 + a2)
         return a1 + a2
 
-
     def sum_two_float_numbers(d1: float, d2: float):
         """
         overwrite function name with a shorter one
@@ -75,24 +74,21 @@ if __name__ == "__main__":
         print("sum_two_float_numbers:", d1, d2, d1 + d2)
         return d1 + d2
 
-    def test_command_map():
-        def test_one(cm, func, inputs, result):
-            cm.parse_args(inputs)
-            assert cm.launch() == result
-            # assert inspect.getdoc(func) in cm.p.format_help()
+    def test_one(cm, func, inputs, result):
+        cm.parse_args(inputs)
+        assert cm.launch() == result
+        # assert inspect.getdoc(func) in cm.p.format_help()
 
-        cm = CommandMap()
-        cm.register()(sum_int)
-        cm.register()(sum_any)
-        cm.register("sum_float1")(sum_two_float_numbers)
-        cm.register("sum_float2")(sum_two_float_numbers)
-        tests = [
-            (cm, sum_int, ("sum_int", "1", "2"), 3),
-            (cm, sum_any, ("sum_any", "abc", "123"), "abc123"),
-            (cm, sum_two_float_numbers, ("sum_float1", "1", "2"), 3.0),
-            (cm, sum_two_float_numbers, ("sum_float2", "1", "2"), 3.0),
-        ]
-        for test in tests:
-            test_one(*test)
-
-    test_command_map()
+    cm = CommandMap()
+    cm.register()(sum_int)
+    cm.register()(sum_any)
+    cm.register("sum_float1")(sum_two_float_numbers)
+    cm.register("sum_float2")(sum_two_float_numbers)
+    tests = [
+        (cm, sum_int, ("sum_int", "1", "2"), 3),
+        (cm, sum_any, ("sum_any", "abc", "123"), "abc123"),
+        (cm, sum_two_float_numbers, ("sum_float1", "1", "2"), 3.0),
+        (cm, sum_two_float_numbers, ("sum_float2", "1", "2"), 3.0),
+    ]
+    for test in tests:
+        test_one(*test)
